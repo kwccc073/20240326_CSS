@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+  <title>Document</title>
+  <style>
+    /* 比較暴力的 reset，除了 before、after 全部清除 */
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+
+    /* 繼承視窗 100% 高度 */
+    html,
+    body {
+      height: 100%;
+    }
+
+    /* vh => view port height */
+    /* body {
+      height: 100vh;
+    } */
+
+    /* 子元素才能繼承 body 100% 高度 */
+    section {
+      height: 100%;
+      background-color: #ffa;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: relative;
+    }
+
+    section:nth-child(odd) {
+      background: lightblue;
+    }
+
+    section:nth-child(even) {
+      background: lemonchiffon;
+    }
+
+    h1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .dashed {
+      display: inline-block;
+      border: 5px dashed #000;
+      width: 200px;
+      height: 200px;
+      /* position: relative; */
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* px, em, rem, %
+    %指的是元素本身尺寸，ex width=300px -> 50%=150px
+    第一個值是x軸，正為右，負為左
+    第二個值是y軸，正為下，負為上
+
+    注意：transform-origin不影響translate (即沒有作用)
+    */
+
+    .translate {
+      transform: translate(-50%, -50%);
+      /* transform是以結果論，下面兩行不等於上面那行（下面的transform會蓋掉上面的） */
+      /* 這邊結果是移動 x */
+      transform: translateX(-50%);
+      /* 這邊的最終結果值變成只有移動 y */
+      transform: translateY(-50%)
+    }
+
+    /* transform: scale()縮放
+    數值是以倍數顯示，不可用其他單位
+    可為負值（會倒過來顯示） */
+    .scale {
+      transform: scale(2);
+      /* 下面的transform會蓋掉上面的
+      transform: scaleX(2);
+      transform: scaleY(2); */
+      /* transform-origin 改變原點
+      預設是center center
+      可以設定值em、px、%、left、right、top、bottom、center
+      如果省略第二個值，預設是center */
+      transform-origin: center;
+    }
+
+    /* transform: rotate(角度) 旋轉 
+    0~360deg，正值為順時針，負值為逆時針*/
+    .rotate {
+      transform: rotate(45deg);
+      /* 移動支撐的點到左上角 */
+      transform-origin: left top;
+    }
+
+    /* transform: skew(角度) 傾斜 */
+    .skew {
+      /* transform: skewX(-10deg);
+      transform: skewY(50deg); */
+      transform: skew(120deg);
+      transform-origin: left bottom;
+    }
+
+    .more {
+      /* 多屬性是由左至右去執行，順序可能會影響結果 */
+      transform: translateX(100px) rotate(45deg);
+      transform: rotate(45deg) translateX(100px);
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>translate (位移)</h1>
+    <div class="dashed">
+      <div class="box translate">translate (位移)</div>
+    </div>
+  </section>
+
+  <section>
+    <h1>Scale (縮放)</h1>
+    <div class="dashed">
+      <div class="box scale">Scale (縮放)</div>
+    </div>
+  </section>
+
+  <section>
+    <h1>Rotate (旋轉)</h1>
+    <div class="dashed">
+      <div class="box rotate">Rotate (旋轉)</div>
+    </div>
+  </section>
+
+  <section>
+    <h1>Skew (傾斜)</h1>
+    <div class="dashed">
+      <div class="box skew">Skew (傾斜)</div>
+    </div>
+  </section>
+
+  <section>
+    <h1>設定多屬性</h1>
+    <div class="dashed">
+      <div class="box more">設定多屬性</div>
+    </div>
+  </section>
+</body>
+
+</html>
